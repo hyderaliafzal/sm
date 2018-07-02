@@ -1,0 +1,24 @@
+<?php
+foreach($products as $product){
+?>
+
+<div class="col-md-3 product-men">
+    <div class="men-pro-item simpleCart_shelfItem">
+        <?php
+        $data['product'] = $product;
+        $this->load->view('frontend/product_image.html', $data);
+        ?>
+        <div class="item-info-product ">
+            <h4><a href="<?= base_url() ?>index.php/product/detail/<?= $product->product_slug ?>"><?= $product->product_title ?></a></h4>
+            <div class="info-product-price">
+                <span class="item_price"><?= $product->price.$product->currency ?></span>
+            </div>
+            <?php
+            $addcart['item'] = $product;
+            $this->load->view('frontend/add-to-cart.html', $addcart);
+            ?>
+        </div>
+    </div>
+</div>
+
+<?php } ?>

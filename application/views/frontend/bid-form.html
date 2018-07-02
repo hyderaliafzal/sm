@@ -1,0 +1,34 @@
+<div class="description">
+    <h5>Enter your bid amount.</h5>
+    <form id="bid-form" action="<?= base_url() ?>index.php/product/bid" method="post">
+        <input id="account_id" type="hidden" value="<?= $user['account_id'] ?>" name="account_id" required>
+        <input id="currency" type="hidden" value="<?= $product->currency ?>" name="currency" required>
+        <input id="product_id" type="hidden" value="<?= $product->product_id ?>" name="product_id" required>
+        <input id="bid-amount" type="text" placeholder="Enter amount" name="amount" required>
+        <input id="bid-btn" type="submit" value="Bid">
+    </form>
+    <p id="message"></p>
+</div>
+
+<script>
+    $('#bid-form').submit(function (event) {
+        event.preventDefault();
+        var formData = {
+            'account_id'              : $('#account_id').val(),
+            'product_id'             : $('#product_id').val(),
+            'amount'                : $('#bid-amount').val(),
+            'currency'                : $('#currency').val()
+        };
+        $.post($(this).attr("action"), formData, function (response) {
+            if(response = true) {
+                $('#message').text('Bid placed successfully');
+                window.setTimeout(function () {
+                    location.reload();
+                }, 3000);
+            } else {
+                $('#message').text('Oops!! something went wrong');
+            }
+        });
+    })
+
+</script>

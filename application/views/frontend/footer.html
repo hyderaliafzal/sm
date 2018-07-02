@@ -1,0 +1,306 @@
+<!-- footer -->
+<div class="footer">
+    <div class="footer_agile_inner_info_w3l">
+        <div class="col-md-3 footer-left">
+            <h2><a href="<?= base_url() ?>"><img src="<?= $store->logo ?>"> </a></h2>
+            <p><?= $store->description ?></p>
+            <ul class="social-nav model-3d-0 footer-social w3_agile_social two">
+                <li><a target="_blank" href="<?= $store->facebook ?>" class="facebook">
+                    <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                    <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div></a></li>
+                <li><a target="_blank" href="<?= $store->twitter ?>" class="twitter">
+                    <div class="front"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+                    <div class="back"><i class="fa fa-twitter" aria-hidden="true"></i></div></a></li>
+                <li><a target="_blank" href="<?= $store->instagram ?>" class="instagram">
+                    <div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                    <div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div></a></li>
+                <li><a target="_blank" href="<?= $store->youtube ?>" class="pinterest">
+                    <div class="front"><i class="fa fa-youtube" aria-hidden="true"></i></div>
+                    <div class="back"><i class="fa fa-youtube" aria-hidden="true"></i></div></a></li>
+            </ul>
+        </div>
+        <div class="col-md-9 footer-right">
+            <div class="sign-grds">
+                <div class="col-md-4 sign-gd">
+                    <h4>Our <span>Collection</span> </h4>
+                    <ul>
+                        <?php
+                        foreach($categories as $category){
+                        ?>
+                        <li><a href="<?= base_url() ?>index.php/categories/category/<?= $category->category_slug ?>"><?= $category->category_title ?></a></li>
+                        <?php } ?>
+                    </ul>
+                </div>
+
+                <div class="col-md-5 sign-gd-two">
+                    <h4>Store <span>Information</span></h4>
+                    <div class="w3-address">
+                        <div class="w3-address-grid">
+                            <div class="w3-address-left">
+                                <i class="fa fa-phone" aria-hidden="true"></i>
+                            </div>
+                            <div class="w3-address-right">
+                                <h6>Phone Number</h6>
+                                <p><?= $store->customer_service_number ?></p>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>
+                        <div class="w3-address-grid">
+                            <div class="w3-address-left">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </div>
+                            <div class="w3-address-right">
+                                <h6>Email Address</h6>
+                                <p>Email :<a href="mailto:example@email.com"> <?= $store->customer_service_email ?></a></p>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>
+                        <div class="w3-address-grid">
+                            <div class="w3-address-left">
+                                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                            </div>
+                            <div class="w3-address-right">
+                                <h6>Location</h6>
+                                <p><?= $store->address ?>
+
+                                </p>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="agile_newsletter_footer">
+            <div class="col-sm-6 newsleft">
+                <h3>SIGN UP FOR NEWSLETTER !</h3>
+            </div>
+            <div class="col-sm-6 newsright">
+                    <input id="newsletter-email" type="email" placeholder="Enter your email..." name="email" required="">
+                    <input id="newsletter-btn" type="submit" value="Submit">
+                    <h3 id="newsletter-msg"></h3>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+        <p class="copy-right">&copy 2018 | Sikandar Museum. LLC <a href=""></a></p>
+    </div>
+</div>
+<!-- //footer -->
+<a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+
+<script src="<?= base_url() ?>frontend/js/modernizr.custom.js"></script>
+<!-- Custom-JavaScript-File-Links -->
+<!-- cart-js -->
+<script src="<?= base_url() ?>frontend/js/minicart.min.js"></script>
+<script>
+    // Mini Cart
+    paypal.minicart.render({
+        action: '#'
+    });
+
+    if (~window.location.search.indexOf('reset=true')) {
+        paypal.minicart.reset();
+    }
+</script>
+
+<!-- //cart-js -->
+<!-- script for responsive tabs -->
+<script src="<?= base_url() ?>frontend/js/easy-responsive-tabs.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#horizontalTab').easyResponsiveTabs({
+            type: 'default', //Types: default, vertical, accordion
+            width: 'auto', //auto or any width like 600px
+            fit: true,   // 100% fit in a container
+            closed: 'accordion', // Start closed if in accordion view
+            activate: function(event) { // Callback function if tab is switched
+                var $tab = $(this);
+                var $info = $('#tabInfo');
+                var $name = $('span', $info);
+                $name.text($tab.text());
+                $info.show();
+            }
+        });
+        $('#verticalTab').easyResponsiveTabs({
+            type: 'vertical',
+            width: 'auto',
+            fit: true
+        });
+    });
+</script>
+<!-- //script for responsive tabs -->
+<!-- stats -->
+<script src="<?= base_url() ?>frontend/js/jquery.waypoints.min.js"></script>
+<script src="<?= base_url() ?>frontend/js/jquery.countup.js"></script>
+<script>
+    $('.counter').countUp();
+</script>
+<!-- //stats -->
+<!-- start-smoth-scrolling -->
+<script type="text/javascript" src="<?= base_url() ?>frontend/js/move-top.js"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function($) {
+        $(".scroll").click(function(event){
+            event.preventDefault();
+            $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+        });
+    });
+</script>
+<!-- here stars scrolling icon -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        /*
+            var defaults = {
+            containerID: 'toTop', // fading element id
+            containerHoverID: 'toTopHover', // fading element hover id
+            scrollSpeed: 1200,
+            easingType: 'linear'
+            };
+        */
+
+        $().UItoTop({ easingType: 'easeOutQuart' });
+
+    });
+</script>
+<!-- //here ends scrolling icon -->
+
+
+<!-- for bootstrap working -->
+<script type="text/javascript" src="<?= base_url() ?>frontend/js/bootstrap.js"></script>
+<script>
+    
+    $('#sign-in').click(() => {
+        $('#sign-in').attr('disabled', true);
+        var form_data = {
+            username: $('#signin-username').val(),
+            password : $('#signin-password').val()
+        };
+        $.post('<?= base_url() ?>index.php/loginapi/loginapi', form_data,
+            function (response) {
+            if(response === 404) {
+                $('#sign-in').attr('disabled', false);
+                $('#response').text('*Account not found.')
+            } else {
+                 $(location).attr("href", '<?= base_url() ?>index.php/user/dashboard');
+            }
+        });
+    });
+
+    $('#signup').click(() => {
+        $('#signup').attr('disabled', true);
+        var form_data = {
+            username: $('#signup-username').val(),
+            email: $('#signup-email').val(),
+            password : $('#signup-password').val()
+        };
+        $.post('<?= base_url() ?>index.php/loginapi/signupapi', form_data, function (response) {
+            console.log(response);
+            if(response === 400) {
+                $('#signup').attr('disabled', false);
+                $('#signup-message').text('Username/Email already registered.');
+            } else {
+                $(location).attr("href", '<?= base_url() ?>index.php/user/dashboard');
+            }
+        });
+    });
+    $('#newsletter-btn').click(() => {
+        var email = $('#newsletter-email').val();
+        $('#newsletter-btn').attr('disabled', true);
+        $.post('<?= base_url() ?>index.php/newsletter/subscribe',
+            {email: email}, function (response) {
+                $('#newsletter-btn').attr('disabled', false);
+                $('#newsletter-msg').text(response);
+            });
+    });
+
+    var items = [];
+    var total = paypal.minicart.cart.total();
+    if(paypal.minicart.cart.total() === 0){
+        $('#checkout-grid').html('<p> Your cart is empty. </p>');
+        $('#checkout-form').hide();
+    } else {
+        paypal.minicart.cart.items().forEach( item => {
+            items.push({
+                id: item._data.product_id,
+                name: item._data.item_name,
+                amount: item._amount,
+                quantity: item._data.quantity,
+                currency: item._data.currency
+            })
+            });
+        var html = '';
+        items.map(item => {
+
+                html = html + '<tr>\n' +
+                '                <td>'+item.name+'</td>\n' +
+                '                <td>'+item.currency+'</td>\n' +
+                '                <td>'+item.quantity+'</td>\n' +
+                    '                <td>'+item.amount+'</td>\n' +
+                    '            </tr>'
+        });
+        html = '<div class="tab1">\n' +
+            '\n' +
+            '                        <div class="single_page_agile_its_w3ls">\n' +
+            '                            <div class="bootstrap-tab-text-grids">' +
+            '                               <table class="table">\n' +
+            '                                    <thead>\n' +
+            '                                    <tr>\n' +
+            '                                        <th>Product</th>\n' +
+            '                                        <th>Currency</th>\n' +
+            '                                        <th>Quantity</th>\n' +
+            '                                        <th>Price</th>\n' +
+            '                                    </tr>\n' +
+            '                                    </thead>\n' +
+            '                                    <tbody>' + html + '</tbody>\n' +
+            '                                </table> <div class="total">Total: '+paypal.minicart.cart.total()+'</div></div>\n' +
+            '                        </div>\n' +
+            '                    </div> ';
+        $('#checkout-grid').html(html);
+    }
+
+    $('#place-order').click(function () {
+        $('#place-order').attr('disabled', true);
+        var data = {
+            products : items,
+            full_name : $('#fname').val(),
+            email : $('#email').val(),
+            contact : $('#contact').val(),
+            shipping_address : $('#adr').val(),
+            shipping_city_state_country : $('#city').val(),
+            total_amount: total,
+            currency: items[0].currency
+        };
+        $.post('<?= base_url() ?>index.php/product/placeorder',
+        data, response => {
+             response = JSON.parse(response);
+                if(response.status === 200) {
+                    $('#message').text(response.message);
+                    paypal.minicart.reset();
+                    window.setTimeout(function () {
+                        $(location).attr("href", '<?= base_url() ?>index.php/user/dashboard');
+                    }, 5);
+                } else {
+                    $('#place-order').attr('disabled', false);
+                    $('#message').text(response.message);
+                }
+            });
+
+    });
+    jQuery(document).ready(function($) {
+        $(".clickable-row").click(function() {
+            window.location = $(this).data("href");
+            $('.minicart-closer').hide();
+        });
+    });
+
+</script>
+<div id="PPMiniCart" style="z-index: 1; top: 51px" class="mini-cart" role="dialog">
+    <form style="box-shadow: none; border: none; text-align: right" method="post" class="checkout-form" action="#" target="">
+        <a href="<?= base_url() ?>index.php/product/checkout" class="checkout-btn" ><i class="fa fa-shopping-cart"></i>Checkout</a>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<br>
+<div class="container">
+    <div id="horizontalTab">
+        <ul class="resp-tabs-list">
+            <li>My Profile</li>
+            <li>Orders</li>
+            <li>Bid Products</li>
+        </ul>
+        <div class="resp-tabs-container">
+            <!--/tab_one-->
+            <div class="tab1">
+
+                <div class="single_page_agile_its_w3ls">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <p>Name: </p>
+                            <p>Username: </p>
+                            <p>Email: </p>
+                            <p>Shipping Address: </p>
+                            <p>Billing Address: </p>
+                        </div>
+                        <div class="col-md-2">
+                            <span><?= $user['full_name'] ?></span>
+                            <span><?= $user['username'] ?></span>
+                            <span><?= $user['email'] ?></span>
+                            <span><?= $user['shipping_address']. $user['shipping_city_state_country'] ?></span>
+                            <span><?= $user['billing_address'].$user['billing_city_state_country'] ?></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--//tab_one-->
+            <div class="tab2">
+
+                <div class="single_page_agile_its_w3ls">
+                    <?php if(sizeOf($orders) > 0) { ?>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Order #</th>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Status</th>
+                            <th>Amount</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                                 $count = 0;
+                                 foreach($orders as $order){
+                                  ?>
+                                <tr style="cursor: pointer" data-toggle="modal" data-target="#orderModal" onclick="orderModal('<?= $count ?>')">
+                                    <td><?= $order->order_id ?></td>
+                                    <td><?= $order->full_name ?></td>
+                                    <td><?= $order->shipping_address.' '.$order->shipping_city_state_country ?></td>
+                                    <td><?= $order->status ?></td>
+                                    <td><?= $order->total_amount.$order->currency ?></td>
+                                </tr>
+                                <?php
+                                $count++;
+                                 }
+                            ?>
+                        </tbody>
+                    </table>
+                    <?php
+                    } else {
+                                    echo 'No orders to show.';
+                                }
+                                ?>
+
+                </div>
+            </div>
+            <div class="tab3">
+
+                <div class="single_page_agile_its_w3ls">
+                    <?php if(sizeOf($products) > 0) { ?>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Bid #</th>
+                            <th>Product</th>
+                            <th>Bid Amount</th>
+                            <th>Currencu</th>
+                            <th>Time</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                                 $count = 0;
+                                 foreach($products as $product){
+                                  ?>
+                        <tr style="cursor: pointer" onclick="window.location = '<?= base_url() ?>index.php/product/detail/<?= $product->product_slug ?>'">
+                            <td><?= $product->bid_id ?></td>
+                            <td><?= $product->product_title ?></td>
+                            <td><?= $product->amount ?></td>
+                            <td><?= $product->currency ?></td>
+                            <td><?= $product->time ?></td>
+                        </tr>
+                        <?php
+                                $count++;
+                                 }
+                            ?>
+                        </tbody>
+                    </table>
+                    <?php
+                    } else {
+                                    echo 'No Bids to show.';
+                                }
+                                ?>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="orderModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Order Detail</h4>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    function orderModal(index) {
+        let order = JSON.parse('<?= json_encode($orders) ?>');
+        order = order[index];
+        let html = '';
+        order.products.map(item => {
+
+            html = html + '<tr>\n' +
+                '                <td>'+item.product_title+'</td>\n' +
+                '                <td>'+order.currency+'</td>\n' +
+                '                <td>'+item.quantity+'</td>\n' +
+                '                <td>'+item.price+'</td>\n' +
+                '            </tr>'
+        });
+        html = '<div class="tab1">\n' +
+            '\n' + '<p>Order #: '+order.order_id+'</p>'+
+            '                            <div class="bootstrap-tab-text-grids">' +
+            '                               <table class="table">\n' +
+            '                                    <thead>\n' +
+            '                                    <tr>\n' +
+            '                                        <th>Product</th>\n' +
+            '                                        <th>Currency</th>\n' +
+            '                                        <th>Quantity</th>\n' +
+            '                                        <th>Price</th>\n' +
+            '                                    </tr>\n' +
+            '                                    </thead>\n' +
+            '                                    <tbody>' + html + '</tbody>\n' +
+            '                                </table> <div class="total">Total: '+ order.total_amount+'</div>' +
+            '                                <div><p>Name: '+order.full_name+'</p>' +
+            '                                       <p>Contact #: '+order.contact+'</p>'+
+            '                                       <p>Shipping Address: '+order.shipping_address+', '+order.shipping_city_state_country+'</p>'+
+            '                                       <p>Status: '+order.status+'</p>'+
+            '                               </div>'+
+            '                           </div>\n' +
+            '                    </div> ';
+        $('.modal-body').html(html);
+    }
+</script>
+<style>
+    span{
+        padding-left: 130px;
+    }
+</style>

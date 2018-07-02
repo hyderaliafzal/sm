@@ -1,0 +1,46 @@
+<div id="main-content">
+    <div class="container-fluid">
+        <div class="section-heading">
+            <h1 class="page-title"><?= $buttonText ?></h1>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel-content">
+                    <h2 class="heading"><?= $msg ?></h2>
+                    <form id="basic-form" action="<?= base_url().$action?>" method="post">
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <input name="first_name" type="text" class="form-control" value="<?= $account->full_name ?>" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input name="email" type="email" class="form-control" value="<?= $account->email ?>" required></input>
+                        </div>
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input name="username" type="text" class="form-control" value="<?= $account->username ?>" required></input>
+                        </div>
+                        <?php
+                        if($buttonText == 'Create Account')
+                        {
+                        ?>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input name="password" type="password" class="form-control" rows="5" cols="30" required></input>
+                        </div>
+                        <div class="form-group">
+                            <input type="radio" name="type" value="admin"> Admin
+                            <input type="radio" name="type" value="customer"> Customer
+                        </div>
+                        <?php  } else {
+                         ?>
+
+                        <?php } ?>
+                        <br>
+                        <button type="submit" class="btn btn-primary"><?= $buttonText ?></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

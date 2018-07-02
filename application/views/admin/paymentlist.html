@@ -1,0 +1,50 @@
+<!-- MAIN CONTENT -->
+<div id="main-content">
+    <div class="container-fluid">
+        <h1 class="sr-only">Dashboard</h1>
+        <!-- WEBSITE ANALYTICS -->
+        <div class="dashboard-section">
+            <div class="section-heading clearfix">
+                <h2 class="section-title"><i class="fa fa-pie-chart"></i> Payments</h2>
+            </div>
+            <div class="panel-content">
+                <div class="panel-content">
+                        <div class="row">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Select</th>
+                                    <th>Account ID</th>
+                                    <th>Payment Mode</th>
+                                    <th>Payable Amount</th>
+                                    <th>Charged Amount</th>
+                                    <th>Card</th>
+                                    <th>Tax</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                            foreach($payments as $payment) {
+                            ?>
+                                <tr>
+                                    <td style="width: 10%"><input class="checkbox" type="checkbox" name="payments[]" value="<?= $payment->payment_id ?>"></td>
+                                    <td style="width: 10%"><?= $payment->account_id ?></td>
+                                    <td style="width: 10%"><?= $payment->payment_mode ?></td>
+                                    <td style="width: 10%"><?= $payment->payable_amount ?></td>
+                                    <td style="width: 10%"><?= $payment->charged_amount ?></td>
+                                    <td style="width: 10%"><?= $payment->card ?></td>
+                                    <td style="width: 10%"><?= $payment->tax ?></td>
+                                    <td style="width: 10%"><?= $payment->status ?></td>
+                                    <td style="width: 5%"><button id="<?= $payment->payment_id ?>"><a onclick="editFunction('<?= $payment->payment_id ?>')"><i class="far fa-edit"></i></a></button></td>
+                                </tr>
+                                <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

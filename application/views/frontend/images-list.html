@@ -1,0 +1,11 @@
+<ul class="slides">
+    <?php
+    if(sizeOf($images) > 0){
+        foreach($images as $image){
+        ?>
+            <li data-thumb="<?= $image->image ?>">
+                <div class="thumb-image"> <img src="<?= $image->image ?>" data-imagezoom="true" class="img-responsive"> </div>
+            </li>
+        <?php }
+    }?>
+</ul>

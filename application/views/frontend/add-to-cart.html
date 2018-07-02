@@ -1,0 +1,24 @@
+<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
+    <?php if($item->product_type === 'display') {
+    echo '<input disabled=true type="submit" name="submit" value="Personal Collection" class="button" />';
+    } else if ($item->product_type === 'sale'){ ?>
+    <form action="#" method="post">
+        <fieldset>
+            <input type="hidden" name="cmd" value="_cart" />
+            <input type="hidden" name="add" value="1" />
+            <input type="hidden" name="product_id" value="<?= $item->product_id ?>" />
+            <input type="hidden" name="item_name" value="<?= $item->product_title ?>" />
+            <input type="hidden" name="amount" value="<?= $item->price ?>" />
+            <input type="hidden" name="discount_amount" value="0.00">
+            <input type="hidden" name="currency_code" value="<?= $item->currency ?>" />
+            <input type="hidden" name="currency" value="<?= $item->currency ?>" />
+            <input type="hidden" name="return" value=" " />
+            <input type="hidden" name="cancel_return" value=" " />
+            <input <?php if($item->quantity < 1) echo  'disabled' ?> type="submit" name="submit" value="Add to cart" class="button" />
+        </fieldset>
+    </form>
+    <?php
+     } else if ($item->product_type === 'auction'){
+    ?> <input onclick="window.location.href='<?= base_url() ?>index.php/product/detail/<?= $item->product_slug ?>'" type="button" name="" value="Make Bid" class="button" />
+    <?php  } ?>
+</div>

@@ -1,0 +1,115 @@
+<!-- /new_arrivals -->
+<div class="new_arrivals_agile_w3ls_info">
+    <div class="container">
+        <h3 class="wthree_text_info">New <span>Arrivals</span></h3>
+        <div id="horizontalTab">
+            <ul class="resp-tabs-list">
+                <li> Qurans</li>
+                <li> Paintings</li>
+                <li> Cameras</li>
+                <li> Watches</li>
+            </ul>
+            <div class="resp-tabs-container">
+                <!--/tab_one-->
+                <div class="tab1">
+                    <?php foreach($qurans as $quran){ ?>
+                    <div class="col-md-3 product-men">
+                        <div class="men-pro-item simpleCart_shelfItem">
+                        <?php
+                            $product['product'] = $quran;
+                            $this->load->view('frontend/product_image.html', $product);
+                            ?>
+                            <div class="item-info-product ">
+                                <h4><a href="<?= base_url() ?>index.php/product/detail/<?= $quran->product_slug ?>"><?= $quran->product_title ?></a></h4>
+                                <div class="info-product-price">
+                                    <span class="item_price"><?= $quran->price.$quran->currency ?></span>
+                                </div>
+                                <?php
+                                $data['item'] = $quran;
+                                $this->load->view('frontend/add-to-cart.html', $data); ?>
+                            </div>
+                        </div>
+                    </div>
+                    <?php } ?>
+                    <div class="clearfix"></div>
+                </div>
+                <!--//tab_one-->
+                <!--/tab_two-->
+                <div class="tab2">
+                    <?php
+                    foreach($paintings as $painting){
+                    ?>
+                    <div class="col-md-3 product-men">
+                        <div class="men-pro-item simpleCart_shelfItem">
+                            <?php
+                            $product['product'] = $painting;
+                            $this->load->view('frontend/product_image.html', $product);
+                            ?>
+                            <div class="item-info-product ">
+                                <h4><a href="<?= base_url() ?>index.php/product/detail/<?= $painting->product_slug ?>"><?= $painting->product_title ?></a></h4>
+                                <div class="info-product-price">
+                                    <span class="item_price"><?= $painting->price.$painting->currency ?></span>
+                                </div>
+                                <?php
+                                $data['item'] = $painting;
+                                $this->load->view('frontend/add-to-cart.html', $data); ?>
+                            </div>
+                        </div>
+                    </div>
+                    <?php } ?>
+                    <div class="clearfix"></div>
+                </div>
+                <!--//tab_three-->
+                <div class="tab3">
+                    <?php foreach($cameras as $camera){ ?>
+                    <div class="col-md-3 product-men">
+                        <div class="men-pro-item simpleCart_shelfItem">
+                            <?php
+                            $product['product'] = $camera;
+                            $this->load->view('frontend/product_image.html', $product);
+                            ?>
+                            <div class="item-info-product ">
+                                <h4><a href="<?= base_url() ?>index.php/product/detail/<?= $camera->product_slug ?>"><?= $camera->product_title ?></a></h4>
+                                <div class="info-product-price">
+                                    <span class="item_price"><?= $camera->price.$painting->currency ?></span>
+                                </div>
+                                <?php
+                                $data['item'] = $camera;
+                                $this->load->view('frontend/add-to-cart.html', $data); ?>
+
+                            </div>
+                        </div>
+                    </div>
+                    <?php } ?>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="tab4">
+                    <?php foreach($watches as $watch){ ?>
+                    <div class="col-md-3 product-men">
+                        <div class="men-pro-item simpleCart_shelfItem">
+                            <?php
+                            $product['product'] = $watch;
+                            $this->load->view('frontend/product_image.html', $product);
+                            ?>
+                            <div class="item-info-product ">
+                                <h4><a href="<?= base_url() ?>index.php/product/detail/<?= $watch->product_slug ?>"><?= $watch->product_title ?></a></h4>
+                                <div class="info-product-price">
+                                    <span class="item_price"><?= $watch->price.$painting->currency ?></span>
+                                </div>
+                                <?php
+                                $data['item'] = $watch;
+                                $this->load->view('frontend/add-to-cart.html', $data); ?>
+
+                            </div>
+
+                        </div>
+                        </div>
+                    </div>
+                    <?php } ?>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- //new_arrivals -->

@@ -1,0 +1,164 @@
+<div id="main-content">
+<div class="container-fluid">
+    <div class="section-heading">
+        <h1 class="page-title">Product Form</h1>
+    </div>
+    <form id="basic-form" method="post" action="<?= $action ?>">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel-content">
+                        <div class="form-group">
+                            <label>Product Title</label>
+                            <input type="text" class="form-control" value="<?php if($product) echo $product->product_title ?>" name="product_title" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Product Meta Title</label>
+                            <input type="text" class="form-control" value="<?php if($product) echo $product->product_meta_title ?>" name="product_meta_title">
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea class="form-control" rows="5" cols="30" value="<?php if($product) echo $product->product_description ?>" placeholder="<?php if($product) echo $product->product_description ?>" name="product_description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Meta Description</label>
+                            <textarea class="form-control" rows="5" cols="30" placeholder="<?php if($product) echo $product->product_meta_description ?>" value="<?php if($product) echo $product->product_meta_title ?>" name="product_meta_description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Price</label>
+                            <input type="text" class="form-control" value="<?php if($product) echo $product->price ?>" name="price">
+                        </div>
+                        <div class="form-group">
+                            <label>Currency</label>
+                            <input type="text" class="form-control" value="<?php if($product) echo $product->currency ?>" name="currency">
+                        </div>
+                        <div class="form-group">
+                            <label>Quanity</label>
+                            <input type="text" class="form-control" value="<?php if($product) echo $product->quantity ?>" name="quantity" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Slug</label>
+                            <input type="text" class="form-control" value="<?php if($product) echo $product->product_slug ?>" name="product_slug">
+                        </div>
+                        <div class="form-group">
+                            <label>Product Code</label>
+                            <input type="text" class="form-control" value="<?php if($product) echo $product->product_code ?>" name="product_code">
+                        </div>
+                        <div class="form-group">
+                            <label>Priority</label>
+                                <input type="radio" class="" name="priority" value="0" >0
+                                <input type="radio" class="" name="priority" value="1" >1
+                        </div>
+                        <div class="form-group">
+                            <label>Taxed</label>
+                            <input type="text" class="form-control" value="<?php if($product) echo $product->taxed ?>" name="taxed" >
+                        </div>
+                        <div class="form-group">
+                            <label>Active?</label>
+                            <select name="is_active">
+                                <option name="is_active" value="1">Enabled</option>
+                                <option name="is_active" value="0">Disabled</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Product Type</label>
+                            <br/>
+                            <select name="product_type">
+                                <option></option>
+                                <?php
+                                foreach($product_types as $type) {
+                                    ?>
+                                    <option name="product_type" value="<?= $type->type_code ?>"><?= $type->type_name ?></option>
+                                <?php } ?>
+                            </select>
+                            <p id="error-multiselect"></p>
+                        </div>
+                        <div class="form-group">
+                            <label>Category</label>
+                            <br/>
+                                <?php
+                                foreach($product_categories as $category) {
+                                    ?>
+                                <input type="checkbox" name="product_category[]" value="<?= $category->category_id ?>"><?= $category->category_title ?></input>
+                                <?php } ?>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-primary"><a href="<?= base_url(); ?>index.php/admin/product"></a>Back</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                    <?php foreach($images as $image)
+                            {
+                            ?>
+                        <div class="col-xs-4 col-sm-3 col-md-2 nopad text-center">
+                            <label class="image-checkbox">
+                                <img class="img-responsive" src="<?= $image->thumbnail_url ?>" />
+                                <input type="checkbox" name="images[]" value="<?= $image->secure_url ?>" />
+                                <i class="fa fa-check hidden"></i>
+                            </label>
+                        </div>
+                    <?php } ?>
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+<style>
+    .nopad {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    /*image gallery*/
+    .image-checkbox {
+        cursor: pointer;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        border: 4px solid transparent;
+        margin-bottom: 0;
+        outline: 0;
+    }
+    .image-checkbox input[type="checkbox"] {
+        display: none;
+    }
+
+    .image-checkbox-checked {
+        border-color: #4783B0;
+    }
+    .image-checkbox .fa {
+        position: absolute;
+        color: #4A79A3;
+        background-color: #fff;
+        padding: 10px;
+        top: 0;
+        right: 0;
+    }
+    .image-checkbox-checked .fa {
+        display: block !important;
+    }
+    .img-responsive{
+        height: 100px;
+        width: 100px;
+    }
+</style>
+<script>
+    // image gallery
+    // init the state from the input
+    $(".image-checkbox").each(function () {
+        if ($(this).find('input[type="checkbox"]').first().attr("checked")) {
+            $(this).addClass('image-checkbox-checked');
+        }
+        else {
+            $(this).removeClass('image-checkbox-checked');
+        }
+    });
+
+    // sync the state to the input
+    $(".image-checkbox").on("click", function (e) {
+        $(this).toggleClass('image-checkbox-checked');
+        var $checkbox = $(this).find('input[type="checkbox"]');
+        $checkbox.prop("checked",!$checkbox.prop("checked"))
+
+        e.preventDefault();
+    });
+</script>

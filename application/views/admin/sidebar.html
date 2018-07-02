@@ -1,0 +1,51 @@
+<!-- LEFT SIDEBAR -->
+<div id="left-sidebar" class="sidebar">
+    <button type="button" class="btn btn-xs btn-link btn-toggle-fullwidth">
+        <span class="sr-only">Toggle Fullwidth</span>
+        <i class="fa fa-angle-left"></i>
+    </button>
+    <div class="sidebar-scroll">
+        <div class="user-account">
+            <div class="dropdown">
+                <a href="#" class="dropdown-toggle user-name" data-toggle="dropdown">Hi, <strong><?php echo $data["username"]; ?></strong> <i class="fa fa-caret-down"></i></a>
+                <ul class="dropdown-menu dropdown-menu-right account">
+                    <li><a href="#">My Profile</a></li>
+                    <li><a href="#">Messages</a></li>
+                    <li><a href="#">Settings</a></li>
+                    <li class="divider"></li>
+                    <li><a href="<?= base_url(); ?>index.php/admin/login/logout">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+        <nav id="left-sidebar-nav" class="sidebar-nav">
+            <ul id="main-menu" class="metismenu">
+                <li class=""><a href="<?php echo base_url(); ?>index.php/admin/account"><i class=""></i> <span>Accounts</span></a></li>
+                <li class="">
+                    <a  href="<?php echo base_url(); ?>index.php/admin/category" class="" aria-expanded="false"><i class=""></i> <span>Categories</span></a>
+                </li>
+                <li class="">
+                    <a  href="<?php echo base_url(); ?>index.php/admin/product" class="" aria-expanded="false"><i class=""></i> <span>Products</span></a>
+                </li>
+                <li class="">
+                    <a  href="<?php echo base_url(); ?>index.php/admin/order" class="" aria-expanded="false"><i class=""></i> <span>Orders</span></a>
+                </li>
+                <li class="">
+                    <a  href="<?php echo base_url(); ?>index.php/admin/payment" class="" aria-expanded="false"><i class=""></i> <span>Payments</span></a>
+                </li>
+                <li class="">
+                    <a  href="<?php echo base_url(); ?>index.php/admin/shipment" class="" aria-expanded="false"><i class=""></i> <span>Shipments</span></a>
+                </li>
+                <li class="">
+                    <a  href="<?php echo base_url(); ?>index.php/admin/page" class="" aria-expanded="false"><i class=""></i> <span>Pages</span></a>
+                </li>
+                <li class="">
+                    <a  href="<?php echo base_url(); ?>index.php/admin/image" class="" aria-expanded="false"><i class=""></i> <span>Images</span></a>
+                </li>
+                <li class="">
+                    <a  href="<?php echo base_url(); ?>index.php/admin/store/setting" class="" aria-expanded="false"><i class=""></i> <span>Store Settings</span></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<!-- END LEFT SIDEBAR -->

@@ -1,0 +1,86 @@
+<!-- MAIN CONTENT -->
+<div id="main-content">
+    <div class="container-fluid">
+        <h1 class="sr-only">Dashboard</h1>
+        <!-- WEBSITE ANALYTICS -->
+        <div class="dashboard-section">
+            <div class="section-heading clearfix">
+                <h2 class="section-title"><i class="fa fa-pie-chart"></i> Categories</h2>
+                <a class="right"><button id="deleteButton"  onclick="deleteC()">Delete</button></a>
+                <a href="<?= base_url(); ?>index.php/admin/category/addcategory" class="right" style="padding-right: 10px"><button>Add Category</button></a>
+            </div>
+            <div class="panel-content">
+                <div class="row">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Select</th>
+                                <!--<th>Image</th>-->
+                                <th>Category Name</th>
+                                <th>Category Description</th>
+                                <th>Slug</th>
+                                <th>Level</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                            foreach($categories as $category) {
+                            ?>
+                                <tr>
+                                    <td style="width: 5%" onchange="checked('<?= $category->category_id ?>')"><input class="checkbox" type="checkbox" name="categories[]" value="<?= $category->category_id ?>"></td>
+                                    <!--<td style="width: 5%"><img height="20px" width="30px" src="<?= $category->category_image; ?>" /></td>-->
+                                    <td style="width: 10%"><?= $category->category_title ?></td>
+                                    <td style="width: 50%"><?= $category->category_description ?></td>
+                                    <td style="width: 10%"><?= $category->category_slug ?></td>
+                                    <td style="width: 5%"><?= $category->level ?></td>
+                                    <td style="width: 5%"><button id="<?= $category->category_id ?>"><a href="<?= base_url() ?>index.php/admin/category/editcategory/<?= $category->category_id ?>"><i class="far fa-edit"></i></a></button></td>
+                                </tr>
+                            <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var values = [];
+    function checked(id) {
+        var found = values.indexOf(id);
+        if(found === -1) {
+            values.push(id);
+        } else {
+            values.splice(found, 1);
+        }
+        console.log(values)
+    }
+    function deleteC() {
+        if(values.length < 1) {
+            alert('Please select a category.');
+        } else {
+            var conf = confirm('Are you sure, you want to delete?');
+            console.log(values);
+            if (conf === true) {
+                $.post('<?= base_url() ?>index.php/admin/category/deletecategory',
+                    {data: values}, function (result) {
+                        console.log(result);
+                        location.reload();
+                    });
+            }
+        }
+    }
+    $('.select-all').click((event) => {
+        console.log('test');
+        if(this.checked) {
+            // Iterate each checkbox
+            $(':checkbox').each(function() {
+                this.checked = true;
+            });
+        } else {
+            $(':checkbox').each(function() {
+                this.checked = false;
+            });
+        }
+    });
+</script>

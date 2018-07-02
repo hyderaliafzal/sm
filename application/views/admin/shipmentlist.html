@@ -1,0 +1,51 @@
+<!-- MAIN CONTENT -->
+<div id="main-content">
+    <div class="container-fluid">
+        <h1 class="sr-only">Dashboard</h1>
+        <!-- WEBSITE ANALYTICS -->
+        <div class="dashboard-section">
+            <div class="section-heading clearfix">
+                <h2 class="section-title"><i class="fa fa-pie-chart"></i> Shipments</h2>
+                <a href="<?= base_url(); ?>index.php/admin/shipment/createshipment" class="right"><button>Create Shipment</button></a>
+            </div>
+            <div class="panel-content">
+                <div class="panel-content">
+                    <form id="deleteForm" name="deleteForm" action="<?= base_url().'index.php/admin/category/deletecategory' ?>" method="get">
+                        <div class="row">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Select</th>
+                                    <th>Carrier</th>
+                                    <th>Carrier Code</th>
+                                    <th>Carrier Shipment ID</th>
+                                    <th>Order ID</th>
+                                    <th>Shipment Status</th>
+                                    <th>Destination</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                            foreach($shipments as $shipment) {
+                            ?>
+                                <tr>
+                                    <td style="width: 5%"><input class="checkbox" type="checkbox" name="shipments[]" value="<?= $category->category_id ?>"></td>
+                                    <td style="width: 5%"><?= $shipment->carrier_name ?></td>
+                                    <td style="width: 10%"><?= $shipment->carrier_code ?></td>
+                                    <td style="width: 50%"><?= $shipment->carrier_shipment_id ?></td>
+                                    <td style="width: 10%"><?= $shipment->order_id ?></td>
+                                    <td style="width: 5%"><?= $shipment->shipment_status ?></td>
+                                    <td style="width: 5%"><?= $shipment->shipment_destination ?></td>
+                                    <td style="width: 5%"><button id="<?= $category->category_id ?>"><a onclick="editFunction('<?= $category->category_id ?>')"><i class="far fa-edit"></i></a></button></td>
+                                </tr>
+                                <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>>

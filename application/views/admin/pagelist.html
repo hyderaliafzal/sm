@@ -1,0 +1,42 @@
+<!-- MAIN CONTENT -->
+<div id="main-content">
+    <div class="container-fluid">
+        <h1 class="sr-only">Dashboard</h1>
+        <!-- WEBSITE ANALYTICS -->
+        <div class="dashboard-section">
+            <div class="section-heading clearfix">
+                <h2 class="section-title"><i class="fa fa-pie-chart"></i> Pages</h2>
+            </div>
+            <div class="panel-content">
+                <div class="panel-content">
+                    <form id="deleteForm" name="deleteForm" action="<?= base_url().'index.php/admin/category/deletecategory' ?>" method="get">
+                        <div class="row">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Component ID</th>
+                                    <th>Component Label</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                            foreach($pages as $page) {
+                            ?>
+                                <tr>
+                                    <td style="width: 5%"><img height="20px" width="30px" src="<?= $page->image; ?>" /></td>
+                                    <td style="width: 20%"><?= $page->component_id ?></td>
+                                    <td style="width: 20%"><?= $page->label ?></td>
+                                    <td><a href="<?= base_url() ?>index.php/admin/page/edit/<?= $page->id ?>" ><i class="fa fa-edit" /></a></td>
+                                </tr>
+                                <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

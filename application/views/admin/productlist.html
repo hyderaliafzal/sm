@@ -1,0 +1,79 @@
+<!-- MAIN CONTENT -->
+<div id="main-content">
+    <div class="container-fluid">
+        <h1 class="sr-only">Dashboard</h1>
+        <!-- WEBSITE ANALYTICS -->
+        <div class="dashboard-section">
+            <div class="section-heading clearfix">
+                <h2 class="section-title"><i class="fa fa-pie-chart"></i> Products</h2>
+                <a onclick="deleteP()" class="right"><button>Delete</button></a>
+                <a href="<?= base_url(); ?>index.php/admin/product/addproduct" class="right" style="padding-right: 10px"><button>Add Product</button></a>
+            </div>
+            <div class="panel-content">
+                <div class="panel-content">
+                        <div class="row">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Select</th>
+                                    <th>Image</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                    <th>Active</th>
+                                    <th>Code</th>
+                                    <th>Type</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                            foreach($products as $product) {
+                            ?>
+                                <tr>
+                                    <td style="width: 5%" onchange="checked('<?= $product->product_id ?>')"><input class="checkbox" type="checkbox" name="categories[]" value="<?= $product->product_id ?>"></td>
+                                    <td style="width: 5%"><img height="20px" width="30px" src="<?= $product->image_1; ?>" /></td>
+                                    <td style="width: 10%"><?= $product->product_title ?></td>
+                                    <td style="width: 40%"><?= $product->product_description ?></td>
+                                    <td style="width: 10%"><?= $product->quantity ?></td>
+                                    <td style="width: 10%"><?= $product->price.$product->currency ?></td>
+                                    <td style="width: 10%"><?= $product->is_active ?></td>
+                                    <td style="width: 10%"><?= $product->product_code ?></td>
+                                    <td style="width: 10%"><?= $product->product_type ?></td>
+                                    <td style="width: 5%"><button id="<?= $product->product_id ?>"><a href="<?= base_url() ?>index.php/admin/product/editproduct/<?= $product->product_id ?>"><i class="far fa-edit"></i></a></button></td>
+                                </tr>
+                                <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var values = [];
+    function checked(id) {
+        var found = values.indexOf(id);
+        if(found === -1) {
+            values.push(id);
+        } else {
+            values.splice(found, 1);
+        }
+    }
+    function deleteP() {
+        if (values.length < 1) {
+            alert('Please select a product.')
+        }  else {
+            var conf = confirm('Are you sure, you want to delete?');
+            if (conf === true) {
+                $.post('<?= base_url() ?>index.php/admin/product/deleteproduct',
+                    {data: values}, function (result) {
+                        $(location).attr('href', '<?= base_url() ?>index.php/admin/product');
+                    });
+            }
+        }
+    }
+</script>

@@ -1,0 +1,130 @@
+<!--/contact-->
+<div class="banner_bottom_agile_info">
+    <div class="container">
+        <div class="contact-grid-agile-w3s">
+            <div class="col-md-4 contact-grid-agile-w3">
+                <div class="contact-grid-agile-w31">
+                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                    <h4>Address</h4>
+                    <p><?= $store->address ?></p>
+                </div>
+            </div>
+            <div class="col-md-4 contact-grid-agile-w3">
+                <div class="contact-grid-agile-w32">
+                    <i class="fa fa-phone" aria-hidden="true"></i>
+                    <h4>Call Us</h4>
+                    <p><?= $store->contact ?></p>
+                </div>
+            </div>
+            <div class="col-md-4 contact-grid-agile-w3">
+                <div class="contact-grid-agile-w33">
+                    <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                    <h4>Email</h4>
+                    <p><?= $store->email ?></p>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+<div class="contact-w3-agile1 map" data-aos="flip-right">
+
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3608.425436824911!2d55.29418896802341!3d25.256270161137298!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f433da641f73d%3A0xd9d7574b480fd574!2sAl+Rais+Shopping+Centre!5e0!3m2!1sen!2s!4v1461692349542" class="map" style="border:0" allowfullscreen=""></iframe>
+</div>
+<div class="banner_bottom_agile_info">
+    <div class="container">
+        <div class="agile-contact-grids">
+            <div class="agile-contact-left">
+                <div class="col-md-6 address-grid">
+                    <h4>For More <span>Information</span></h4>
+                    <div class="mail-agileits-w3layouts">
+                        <i class="fa fa-volume-control-phone" aria-hidden="true"></i>
+                        <div class="contact-right">
+                            <p>Telephone </p><span><?= $store->contact ?></span>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </div>
+                    <div class="mail-agileits-w3layouts">
+                        <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                        <div class="contact-right">
+                            <p>Mail </p><a href="mailto:info@example.com">info@example.com</a>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </div>
+                    <div class="mail-agileits-w3layouts">
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                        <div class="contact-right">
+                            <p>Location</p><span><?= $store->address ?></span>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </div>
+                    <ul class="social-nav model-3d-0 footer-social w3_agile_social two contact">
+                        <li class="share">SHARE ON : </li>
+                        <li><a href="#" class="facebook">
+                            <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                            <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div></a></li>
+                        <li><a href="#" class="twitter">
+                            <div class="front"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+                            <div class="back"><i class="fa fa-twitter" aria-hidden="true"></i></div></a></li>
+                        <li><a href="#" class="instagram">
+                            <div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                            <div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div></a></li>
+                        <li><a href="#" class="pinterest">
+                            <div class="front"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
+                            <div class="back"><i class="fa fa-linkedin" aria-hidden="true"></i></div></a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 contact-form">
+                    <h4 class="white-w3ls">Contact <span>Form</span></h4>
+                    <form id="contact-us" action="#" method="post">
+                        <div class="styled-input agile-styled-input-top">
+                            <input id="name" type="text" name="Name" required="">
+                            <label>Name</label>
+                            <span></span>
+                        </div>
+                        <div class="styled-input">
+                            <input id="email" type="email" name="Email" required="">
+                            <label>Email</label>
+                            <span></span>
+                        </div>
+                        <div class="styled-input">
+                            <input id="subject" type="text" name="Subject" required="">
+                            <label>Subject</label>
+                            <span></span>
+                        </div>
+                        <div class="styled-input">
+                            <textarea id="message" name="Message" required=""></textarea>
+                            <label>Message</label>
+                            <span></span>
+                        </div>
+                        <input type="submit" value="SEND">
+                        <p id="success-message"></p>
+                    </form>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+<!--//contact-->
+<script>
+    $('#contact-us').submit(function (event) {
+        event.preventDefault();
+        var form = {
+            name: $('#name').val(),
+            email: $('#email').val(),
+            subject: $('#subject').val(),
+            message: $('#message').val()
+        };
+
+        $.ajax({
+            url: '<?= base_url() ?>index.php/user/message',
+            method: 'post',
+            data: form
+        }).done(function (response) {
+            if(response){
+                $('#success-message').text('Message sent successfully.');
+            }
+        });
+    });
+</script>

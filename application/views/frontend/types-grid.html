@@ -1,0 +1,34 @@
+<div id="products-grid-container" class="container">
+    <div id="products-grid">
+    <?php
+    $data['items'] = $items;
+    $this->load->view('frontend/col-4-grid.html', $data);
+    ?>
+    </div>
+</div>
+<script>
+    var offset = '<?= $offset ?>';
+    var limit = '<?= $limit ?>';
+    var type = '<?= $type ?>';
+    var products = parseInt('<?php echo $product_count ?>') - limit;
+    if (products > 0) {
+        $('#products-grid-container').append('    <div id="load-more" class="item-info-product ">\n' +
+            '        <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">\n' +
+            '            <input id="load-more" class="button" type="button" value="Load More">\n' +
+            '        </div>\n' +
+            '    </div>');
+    }
+    $('#load-more').click(function () {
+        $('#load-more').attr('disabled', true);
+        offset++;
+        $.post('<?= base_url() ?>index.php/product/productset/' + type + '/' + limit + '/' + offset,
+            function (response) {
+                $('#products-grid').append(response);
+                $('#load-more').attr('disabled', false);
+                products = products - (limit * offset);
+                if (products <= 0) {
+                    $('#load-more').hide();
+                }
+            });
+    });
+</script>

@@ -1,0 +1,22 @@
+<?php
+    foreach($items as $item){
+?>
+<div class="col-md-4 product-men">
+    <div class="men-pro-item simpleCart_shelfItem">
+        <?php
+        $data['product'] = $item;
+        $this->load->view('frontend/product_image.html', $data);
+        ?>
+        <div class="item-info-product ">
+            <h4><a href="<?= base_url() ?>index.php/product/detail/<?= $item->product_slug ?>"><?= $item->product_title ?></a></h4>
+            <div class="info-product-price">
+                <span class="item_price"><?= $item->price.$item->currency ?></span>
+            </div>
+            <?php
+                $productitem['item'] = $item;
+                $this->load->view('frontend/add-to-cart.html', $productitem);
+            ?>
+        </div>
+    </div>
+</div>
+<?php } ?>

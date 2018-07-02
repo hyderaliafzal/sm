@@ -1,0 +1,42 @@
+<!-- MAIN CONTENT -->
+<div id="main-content">
+    <div class="container-fluid">
+        <h1 class="sr-only">Dashboard</h1>
+        <!-- WEBSITE ANALYTICS -->
+        <div class="dashboard-section">
+            <div class="section-heading clearfix">
+                <h2 class="section-title"><i class="fa fa-pie-chart"></i> Orders</h2>
+            </div>
+            <div class="panel-content">
+                <div class="panel-content">
+                        <div class="row">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Contact</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                            foreach($orders as $order) {
+                            ?>
+                                <tr>
+                                    <td style="width: 20%"><?= $order->full_name ?></td>
+                                    <td style="width: 20%"><?= $order->email ?></td>
+                                    <td style="width: 20%"><?= $order->contact ?></td>
+                                    <td style="width: 20%"><?= $order->status ?></td>
+                                    <td ><button id="<?= $order->order_id ?>"><a href="<?= base_url() ?>index.php/admin/order/orderdetail/<?= $order->order_id ?>"><i class="far fa-info"></i></a></button></td>
+                                </tr>
+                                <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

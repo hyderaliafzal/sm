@@ -1,0 +1,71 @@
+<div id="main-content">
+    <div class="container-fluid">
+        <div class="section-heading">
+            <h1 class="page-title"><?= $page->component_id ?></h1>
+        </div>
+        <div class="row">
+            <form id="basic-form" action="<?= $base.$action.$page->id ?>" method="post">
+                <div class="col-md-6">
+                    <div class="panel-content">
+                            <div class="form-group">
+                                <label>Label</label>
+                                <input name="label" type="text" class="form-control" value="<?= $page->label ?>">
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <input name="description" type="text" class="form-control" value="<?= $page->description ?>" >
+                            </div>
+                            <div class="form-group">
+                                <label>Navigation URL</label>
+                                <input name="navigation_url" type="text" class="form-control" value="<?= $page->navigation_url ?>">
+                            </div>
+                            <div class="form-group">
+                                <label>Slug</label>
+                                <input name="slug" type="text" class="form-control" value="<?= $page->slug ?>">
+                            </div>
+                            <br>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <ul class="list-unstyled row">
+                        <?php foreach($images as $image)
+                    {
+                    ?>
+                        <li class="col-md-2 col-sm-4 col-xs-6">
+                            <a id="customoptions_image_0_0" title="" onClick="return false;" href="#"> <img style="height: 55px" class="small-image-preview img-responsive v-middle" title="" src="<?= $image->thumbnail_url ?>"> </a>
+                            <input id="options_9_3" class="radio validate-one-required-by-name product-custom-option" type="radio" value="<?= $image->secure_url ?>" name="image" onClick="opConfig.reloadPrice();">
+                        </li>
+                        <?php } ?>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<style>
+    li{
+        padding:1px;
+        list-style:none;
+        display:inline-block;
+        width:150px;
+        margin:1px;
+    }
+    .active{
+        border:1px solid red;
+        padding:1px;
+    }
+    .radio{
+        display:none;
+    }
+</style>
+<script>
+    $("a").click(function() {
+        $(this).next().prop("checked", "checked");
+    });
+
+    $('a').click(function() {
+        $('li:has(input:radio:checked)').addClass('active');
+        $('li:has(input:radio:not(:checked))').removeClass('active');
+    });
+</script>

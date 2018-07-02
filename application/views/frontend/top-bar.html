@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><?= $store->name ?></title>
+    <!--/tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="<?= $store->meta ?>" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+    function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link rel="icon" type="image/png" href="<?= $store->favicon ?>">
+    <!--//tags -->
+    <link href="<?= base_url() ?>frontend/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="<?= base_url() ?>frontend/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="<?= base_url() ?>frontend/css/font-awesome.css" rel="stylesheet">
+    <link href="<?= base_url() ?>frontend/css/easy-responsive-tabs.css" rel='stylesheet' type='text/css'/>
+    <!-- //for bootstrap working -->
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="<?= base_url() ?>frontend/js/jquery-2.1.4.min.js"></script>
+
+</head>
+<body style="background-image: url('<?= base_url() ?>frontend/images/bg.jpg')">
+<!-- header -->
+<div class="header" id="home" >
+    <div class="container">
+        <ul>
+            <?php
+            if(sizeOf($user) > 1){
+            ?>
+            <li> <a href="<?= base_url() ?>index.php/user/dashboard" ><i class="fa fa-dashboard" aria-hidden="true"></i><?= $user['username'] ?> </a></li>
+            <li> <a href="<?= base_url() ?>index.php/user/logout" ><i class="fa fa-sign-out" aria-hidden="true"></i> Logout </a></li>
+            <?php } else {
+            ?>
+            <li> <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Sign In </a></li>
+            <li> <a href="#" data-toggle="modal" data-target="#myModal2"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Sign Up </a></li>
+            <?php } ?>
+            <li><i class="fa fa-phone" aria-hidden="true"></i> Call : <?= $store->contact ?></li>
+            <li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:info@example.com"><?= $store->email ?></a></li>
+        </ul>
+    </div>
+</div>
+<!-- //header -->

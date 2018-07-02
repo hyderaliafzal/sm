@@ -1,0 +1,89 @@
+<!-- banner-bootom-w3-agileits -->
+<div class="banner-bootom-w3-agileits">
+    <div class="container">
+       <?php
+       $categories['categories'] = $categories;
+       $this->load->view('frontend/side-bar.html', $categories);
+       ?>
+        <div class="col-md-8 products-right">
+            <!--<h5>Product <span>Compare(0)</span></h5>
+            <div class="sort-grid">
+                <div class="sorting">
+                    <h6>Sort By</h6>
+                    <select id="country1" onchange="change_country(this.value)" class="frm-field required sect">
+                        <option value="null">Default</option>
+                        <option value="null">Name(A - Z)</option>
+                        <option value="null">Name(Z - A)</option>
+                        <option value="null">Price(High - Low)</option>
+                        <option value="null">Price(Low - High)</option>
+                        <option value="null">Model(A - Z)</option>
+                        <option value="null">Model(Z - A)</option>
+                    </select>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="sorting">
+                    <h6>Showing</h6>
+                    <select id="country2" onchange="change_country(this.value)" class="frm-field required sect">
+                        <option value="null">7</option>
+                        <option value="null">14</option>
+                        <option value="null">28</option>
+                        <option value="null">35</option>
+                    </select>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
+            </div>-->
+
+            <div class="men-wear-bottom">
+                <div class="col-sm-4 men-wear-left">
+                    <img class="img-responsive" src="<?= $category->category_image ?>" alt=" " />
+                </div>
+                <div class="col-sm-8 men-wear-right">
+                    <h4><?= $category->category_title ?></h4>
+                    <p><?= $category->category_description ?> </p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <?php
+            $show_first['items'] = $show_first;
+            $this->load->view('frontend/col-4-grid.html', $show_first);
+            ?>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="single-pro">
+            <?php
+            $prod['products'] = $products;
+            $this->load->view('frontend/col-3-grid.html', $prod);
+            ?>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<script>
+    var offset = '<?= $offset ?>';
+    var limit = '<?= $limit ?>';
+    var id = '<?= $id ?>';
+    var products = parseInt('<?php echo $product_count ?>') - limit;
+    console.log(products);
+    if (products > 0) {
+        $('.single-pro').append('    <div id="load-more" class="item-info-product ">\n' +
+            '        <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">\n' +
+            '            <input id="load-more" class="button" type="button" value="Load More">\n' +
+            '        </div>\n' +
+            '    </div>');
+    }
+    $('#load-more').click(function () {
+        $('#load-more').attr('disabled', true);
+        offset++;
+        $.post('<?= base_url() ?>index.php/categories/productset/' + id + '/' + limit + '/' + offset,
+            function (response) {
+                $('.single-pro').append(response);
+                $('#load-more').attr('disabled', false);
+                products = products - (limit * offset);
+                if (products <= 0) {
+                    $('#load-more').hide();
+                }
+            });
+    });
+</script>

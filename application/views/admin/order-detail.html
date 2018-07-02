@@ -1,0 +1,79 @@
+<!-- MAIN CONTENT -->
+<div id="main-content">
+    <div class="container-fluid">
+        <h1 class="sr-only">Order Detail</h1>
+        <!-- WEBSITE ANALYTICS -->
+        <div class="dashboard-section">
+            <div class="section-heading clearfix">
+                <h2 class="section-title"><i class="fa fa-pie-chart"></i> Order Detail</h2>
+                <?php
+                    if(ucwords($order->status) == 'Pending'){ ?>
+                <a class="right"><button id="confirm-btn" onclick="confirm('<?= $order->order_id ?>')">Confirm</button></a>
+                <?php } ?>
+            </div>
+            <div class="panel-content">
+                <div class="tab2">
+
+                    <div class="single_page_agile_its_w3ls">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Currency</th>
+                                <th>Quantity</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                             foreach($items as $item){
+                             ?>
+                            <tr>
+                                <td><?= $item->product_title ?></td>
+                                <td><?= $item->price ?></td>
+                                <td><?= $order->currency ?></td>
+                                <td><?= $item->quantity ?></td>
+                            </tr>
+                            <?php
+                             }
+                             ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <p>Order #</p>
+                        <p>Name</p>
+                        <p>Email</p>
+                        <p>Contact</p>
+                        <p>Shipping Address</p>
+                        <p>Billing Address</p>
+                        <p>Taxed</p>
+                        <p>Total </p>
+                        <p>Status</p>
+                    </div>
+                    <div class="col-md-3">
+                        <p><?= $order->order_id ?></p>
+                        <p><?= $order->full_name ?></p>
+                        <p><?= $order->email ?></p>
+                        <p><?= $order->contact ?></p>
+                        <p><?= $order->shipping_address.', '.$order->shipping_city_state_country ?></p>
+                        <p><?= $order->billing_address. ', '.$order->billing_city_state_country ?></p>
+                        <p><?= $order->tax.'(if any) ' ?></p>
+                        <p><?= $order->total_amount ?></p>
+                        <p><?= $order->status ?></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function confirm(id) {
+        $.post('<?= base_url() ?>index.php/admin/order/confirm/'+id, function (response) {
+                $('#confirm-btn').html('Confirmed');
+                location.reload();
+        })
+    }
+</script>

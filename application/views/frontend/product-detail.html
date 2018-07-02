@@ -1,0 +1,130 @@
+<!-- banner-bootom-w3-agileits -->
+<div class="banner-bootom-w3-agileits">
+    <div class="container">
+        <div class="col-md-4 single-right-left ">
+            <div class="grid images_3_of_2">
+                <div class="flexslider">
+
+                    <ul class="slides">
+                        <li data-thumb="<?= $product->image_1 ?>">
+                            <div class="thumb-image"> <img src="<?= $product->image_1 ?>" data-imagezoom="true" class="img-responsive"> </div>
+                        </li>
+
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 single-right-left simpleCart_shelfItem">
+            <h3><?= $product->product_title ?></h3>
+            <p><span class="item_price"><?= $product->price.$product->currency ?></span> </p>
+            <div class="rating1">
+						<span class="starRating">
+							<input id="rating5" type="radio" name="rating" value="5">
+							<label for="rating5">5</label>
+							<input id="rating4" type="radio" name="rating" value="4">
+							<label for="rating4">4</label>
+							<input id="rating3" type="radio" name="rating" value="3" checked="">
+							<label for="rating3">3</label>
+							<input id="rating2" type="radio" name="rating" value="2">
+							<label for="rating2">2</label>
+							<input id="rating1" type="radio" name="rating" value="1">
+							<label for="rating1">1</label>
+						</span>
+            </div>
+            <div class="color-quality">
+                <div class="color-quality-right">
+                    <h5>Quality :</h5>
+                    <p><?= $product->quantity ?></p>
+                </div>
+            </div>
+            <div class="occasion-cart">
+                <?php if($product->product_type === 'sale' || $product->product_type === 'display'){
+                    $data['item'] = $product;
+                    $this->load->view('frontend/add-to-cart.html', $data);
+                } else if ($product->product_type = 'auction') {
+                     if(sizeOf($user) < 2){
+                echo '<p><a link="<?= base_url() ?>index.php/product/detail/<?= $product=>slug ?>" onclick="" href="#" data-toggle="modal" data-target="#myModal">Please Login to participate. </a></p>';
+                    } else {
+                        $this->load->view('frontend/bid-form.html');
+                    }
+                }
+                ?>
+            </div>
+            <ul class="social-nav model-3d-0 footer-social w3_agile_social single_page_w3ls">
+                <li class="share">Share On : </li>
+                <li><a href="#" class="facebook">
+                    <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                    <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div></a></li>
+                <li><a href="#" class="twitter">
+                    <div class="front"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+                    <div class="back"><i class="fa fa-twitter" aria-hidden="true"></i></div></a></li>
+                <li><a href="#" class="instagram">
+                    <div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                    <div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div></a></li>
+                <li><a href="#" class="pinterest">
+                    <div class="front"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
+                    <div class="back"><i class="fa fa-linkedin" aria-hidden="true"></i></div></a></li>
+            </ul>
+
+        </div>
+        <div class="clearfix"> </div>
+        <!-- /new_arrivals -->
+        <div class="responsive_tabs_agileits">
+            <div id="horizontalTab">
+                <ul class="resp-tabs-list">
+                    <li>Description</li>
+                    <?php if($product->product_type === 'auction') echo "<li>Bids</li>";  ?>
+                </ul>
+                <div class="resp-tabs-container">
+                    <!--/tab_one-->
+                    <div class="tab1">
+
+                        <div class="single_page_agile_its_w3ls">
+                            <p>
+                                <?= $product->product_description ?>
+                            </p>
+                        </div>
+                    </div>
+                    <!--//tab_one-->
+                    <?php
+                    if($product->product_type === 'auction') { ?>
+                    <div class="tab2">
+
+                        <div class="single_page_agile_its_w3ls">
+                            <div class="bootstrap-tab-text-grids">
+                                <?php
+                                    if(sizeOf($bids) > 0 ) {
+                                ?>
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>User</th>
+                                        <th>Bidding Amount</th>
+                                        <th>Currency</th>
+                                        <th>Time</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php foreach($bids as $bid){ ?>
+                                        <tr>
+                                            <td><?= $bid->full_name ?></td>
+                                            <td><?= $bid->amount ?></td>
+                                            <td> in <?= $product->currency ?></td>
+                                            <td> at <?= $bid->time ?></td>
+                                        </tr>
+                                    <?php } ?>
+                                    </tbody>
+                                </table>
+                                <?php } else { echo '<p>No Bids to show </p>'; } ?>
+                            </div>
+                        </div>
+                    </div>
+                    <?php } ?>
+                </div>
+            </div>
+        </div>
+        <!-- //new_arrivals -->
+    </div>
+</div>
+<!--//single_page-->
