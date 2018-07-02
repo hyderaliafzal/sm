@@ -1,5 +1,4 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Welcome extends CI_Controller {
 
@@ -7,7 +6,6 @@ class Welcome extends CI_Controller {
     {
         parent::__construct();
         $this->load->helper('url');
-        $this->load->library('cart');
     }
 
     public function index()
