@@ -49,7 +49,7 @@ class Welcome extends CI_Controller {
         $this->load->view('frontend/banner-bottom2.html');
         $this->load->view('frontend/two-grids.html');
         $this->load->view('frontend/new-arrivals.html', $data);
-        $this->load->view('frontend/schedule-bottom.html');
+        // $this->load->view('frontend/schedule-bottom.html');
         $this->load->view('frontend/footer.html');
 	}
 
